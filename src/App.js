@@ -7,6 +7,10 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const clearState = () => {
+    setTitle("");
+    setUrl("");
+  };
 
   const fetchRecipes = () => {
     axios
@@ -23,7 +27,10 @@ function App() {
         url: url,
         title: title
       })
-      .then(res => fetchRecipes())
+      .then(res => {
+        fetchRecipes();
+        clearState();
+      })
       .catch(e => console.log(e));
   };
 
@@ -34,22 +41,28 @@ function App() {
     <div className="App">
       <header className="App-header">Rezepte!</header>
       <div className="App-content">
-        <form onSubmit={postRecipe}>
-          <label htmlFor="title">
-            <input
-              name="title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-          </label>
-          <label htlmFor="url">
-            <input
-              name="title"
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-            />
-          </label>
-          <button type="button" onClick={postRecipe}>
+        <form className="App-form" onSubmit={postRecipe}>
+          <label htmlFor="title">Title</label>
+          <input
+            name="title"
+            value={title}
+            placeholder="Enter Recipe Title"
+            onChange={e => setTitle(e.target.value)}
+          />
+
+          <label htlmFor="url">Url</label>
+          <input
+            name="title"
+            value={url}
+            placeholder="Enter Recipe Url"
+            onChange={e => setUrl(e.target.value)}
+          />
+
+          <button
+            style={{ width: "150px", marginTop: "10px" }}
+            type="button"
+            onClick={postRecipe}
+          >
             Rezept senden
           </button>
         </form>
