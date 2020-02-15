@@ -34,13 +34,26 @@ function App() {
       .catch(e => console.log(e));
   };
 
+  const randomRecipe = () => {
+    const len = recipes.length;
+    const index = Math.floor(Math.random() * len);
+    console.log(index, recipes[index]?.title);
+    alert(
+      `Das Rezept: ${recipes[index]?.title} und die Homepage: ${recipes[index]?.url}`
+    );
+  };
+
   useEffect(() => {
     fetchRecipes();
   }, []);
+
   return (
     <div className="App">
       <header className="App-header">Rezepte!</header>
       <div className="App-content">
+        <button type="button" onClick={randomRecipe}>
+          Zufaelliges Gericht waehlen
+        </button>
         <form className="App-form" onSubmit={postRecipe}>
           <label htmlFor="title">Title</label>
           <input
