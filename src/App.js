@@ -36,7 +36,7 @@ function App() {
 
   const deleteRecipe = id => {
     axios
-      .post("https://recipes-111.herokuapp.com/recipes", {
+      .delete("https://recipes-111.herokuapp.com/recipes", {
         id: id
       })
       .then(() => {
