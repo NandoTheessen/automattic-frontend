@@ -89,7 +89,7 @@ function App() {
           </button>
         </form>
         {recipes.map(recipe => {
-          const id = recipe.id;
+          const id = recipe._id;
           return (
             <div key={recipe.title}>
               <p>{recipe.title}</p>
@@ -98,7 +98,7 @@ function App() {
               </a>
               <button
                 type="button"
-                onClick={id => {
+                onClick={() => {
                   deleteRecipe(id);
                 }}
               >
