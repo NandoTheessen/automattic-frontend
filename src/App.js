@@ -34,6 +34,17 @@ function App() {
       .catch(e => console.log(e));
   };
 
+  const deleteRecipe = id => {
+    axios
+      .post("https://recipes-111.herokuapp.com/recipes", {
+        id: id
+      })
+      .then(() => {
+        fetchRecipes();
+      })
+      .catch(e => console.log(e));
+  };
+
   const randomRecipe = () => {
     const len = recipes.length;
     const index = Math.floor(Math.random() * len);
@@ -86,6 +97,9 @@ function App() {
               <a target="blank" href={recipe.url}>
                 Take me to it!
               </a>
+              <button type="button" onClick={id => deleteRecipe(id)}>
+                X
+              </button>
             </div>
           );
         })}
