@@ -36,9 +36,7 @@ function App() {
 
   const deleteRecipe = id => {
     axios
-      .delete("https://recipes-111.herokuapp.com/recipes", {
-        id: id
-      })
+      .post(`https://recipes-111.herokuapp.com/recipes/${id}`)
       .then(() => {
         fetchRecipes();
       })
@@ -91,13 +89,19 @@ function App() {
           </button>
         </form>
         {recipes.map(recipe => {
+          const id = recipe.id;
           return (
             <div key={recipe.title}>
               <p>{recipe.title}</p>
               <a target="blank" href={recipe.url}>
                 Take me to it!
               </a>
-              <button type="button" onClick={id => deleteRecipe(id)}>
+              <button
+                type="button"
+                onClick={id => {
+                  deleteRecipe(id);
+                }}
+              >
                 X
               </button>
             </div>
